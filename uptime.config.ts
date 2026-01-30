@@ -9,11 +9,7 @@ const pageConfig: PageConfig = {
   // Title for your status page
   title: "Norus Status Page",
   // Links shown at the header of your status page, could set `highlight` to `true`
-  links: [
-    //{ link: 'https://github.com/lyc8503', label: 'GitHub' },
-    //{ link: 'https://blog.lyc8503.net/', label: 'Blog' },
-    //{ link: 'mailto:me@lyc8503.net', label: 'Email Me', highlight: true },
-  ],
+  links: [],
 }
 
 const workerConfig: WorkerConfig = {
@@ -25,7 +21,8 @@ const workerConfig: WorkerConfig = {
       name: 'norus.com.br',
       method: 'GET',
       target: 'https://norus.com.br',
-      tooltip: 'Active',
+      checkProxy: 'worker://sams', // South America
+      tooltip: 'Soluções inteligentes para gestão e eficiência no setor de energia',
       statusPageLink: 'https://norus.com.br',
       expectedCodes: [200, 301, 302, 307, 308],
       timeout: 10000,
@@ -39,7 +36,8 @@ const workerConfig: WorkerConfig = {
       name: 'prospec.app',
       method: 'GET',
       target: 'https://prospec.app',
-      tooltip: 'Active • Pro • ~44.69k',
+      checkProxy: 'worker://sams', // South America
+      tooltip: 'Plataforma avançada para prospecção e análise de dados de mercado',
       statusPageLink: 'https://prospec.app',
       expectedCodes: [200, 301, 302, 307, 308],
       timeout: 10000,
@@ -53,7 +51,8 @@ const workerConfig: WorkerConfig = {
       name: 'pluvia.app',
       method: 'GET',
       target: 'https://pluvia.app',
-      tooltip: 'Active • Pro • ~6.3k',
+      checkProxy: 'worker://sams', // South America
+      tooltip: 'Sistema especializado em monitoramento e gestão de recursos hídricos',
       statusPageLink: 'https://pluvia.app',
       expectedCodes: [200, 301, 302, 307, 308],
       timeout: 10000,
@@ -67,7 +66,8 @@ const workerConfig: WorkerConfig = {
       name: 'imeris.app',
       method: 'GET',
       target: 'https://imeris.app',
-      tooltip: 'Active • Pro • ~1.45k',
+      checkProxy: 'worker://sams', // South America
+      tooltip: 'Ecossistema digital para gestão integrada e inteligência operacional',
       statusPageLink: 'https://imeris.app',
       expectedCodes: [200, 301, 302, 307, 308],
       timeout: 10000,
@@ -77,21 +77,14 @@ const workerConfig: WorkerConfig = {
     },
   ],
   // [Optional] Notification settings
+  notification: {
+    timeZone: 'America/Sao_Paulo',
+    gracePeriod: 5,
+  },
 }
 
 // Manutenções comentadas para não exibirem alertas
-const maintenances: MaintenanceConfig[] = [
-  /*
-  {
-    monitors: ['norus_energy'],
-    title: 'Test Maintenance',
-    body: 'This is a test maintenance, server software upgrade',
-    start: '2020-01-01T00:00:00+08:00',
-    end: '2050-01-01T00:00:00+08:00',
-    color: 'blue',
-  },
-  */
-]
+const maintenances: MaintenanceConfig[] = []
 
 // Don't edit this line
 export { maintenances, pageConfig, workerConfig }
