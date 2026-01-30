@@ -1,19 +1,11 @@
-// This is a simplified example config file for quickstart
-// Some not frequently used features are omitted/commented out here
-// For a full-featured example, please refer to `uptime.config.full.ts`
-
-// Don't edit this line
 import { MaintenanceConfig, PageConfig, WorkerConfig } from './types/config'
 
 const pageConfig: PageConfig = {
-  // Title for your status page
   title: "Norus Status Page",
-  // Links shown at the header of your status page, could set `highlight` to `true`
   links: [],
 }
 
 const workerConfig: WorkerConfig = {
-  // Define all your monitors here
   monitors: [
     // --- Norus ---
     {
@@ -25,23 +17,42 @@ const workerConfig: WorkerConfig = {
       statusPageLink: 'https://norus.com.br',
       expectedCodes: [200, 301, 302, 307, 308],
       timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+      headers: { 'User-Agent': 'Uptimeflare' },
     },
-    // --- Prospec ---
+    // --- Prospec (Monitoramento detalhado) ---
     {
-      id: 'Prospec App',
-      name: 'prospec.app',
+      id: 'Prospec App Health',
+      name: 'App Prospec (Pre-prod)',
       method: 'GET',
-      target: 'https://prospec.app',
-      tooltip: 'Plataforma avançada para prospecção e análise de dados de mercado',
-      statusPageLink: 'https://prospec.app',
-      expectedCodes: [200, 301, 302, 307, 308],
+      target: 'https://preprod.prospec.suite.energy/health',
+      tooltip: 'Verificação de integridade do ambiente de pré-produção Prospec',
+      statusPageLink: 'https://preprod.prospec.suite.energy/health',
+      expectedCodes: [200],
       timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+      headers: { 'User-Agent': 'Uptimeflare' },
+    },
+    {
+      id: 'Prospec API Health',
+      name: 'API Programática (Pre-prod)',
+      method: 'GET',
+      target: 'https://preprod.api.prospec.suite.energy/health',
+      tooltip: 'Monitoramento da API programática de pré-produção',
+      statusPageLink: 'https://preprod.api.prospec.suite.energy/health',
+      expectedCodes: [200],
+      timeout: 10000,
+      headers: { 'User-Agent': 'Uptimeflare' },
+    },
+    // --- Suite Energy / Projeções ---
+    {
+      id: 'Suite Projeções Login',
+      name: 'Norus Projeções Login',
+      method: 'GET',
+      target: 'https://norus.projecoes-preprod.suite.energy/login',
+      tooltip: 'Interface de acesso ao sistema de projeções Suite Energy',
+      statusPageLink: 'https://norus.projecoes-preprod.suite.energy/login',
+      expectedCodes: [200],
+      timeout: 10000,
+      headers: { 'User-Agent': 'Uptimeflare' },
     },
     // --- Pluvia ---
     {
@@ -53,9 +64,7 @@ const workerConfig: WorkerConfig = {
       statusPageLink: 'https://pluvia.app',
       expectedCodes: [200, 301, 302, 307, 308],
       timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+      headers: { 'User-Agent': 'Uptimeflare' },
     },
     // --- Imeris ---
     {
@@ -67,20 +76,24 @@ const workerConfig: WorkerConfig = {
       statusPageLink: 'https://imeris.app',
       expectedCodes: [200, 301, 302, 307, 308],
       timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+      headers: { 'User-Agent': 'Uptimeflare' },
     },
   ],
-  // [Optional] Notification settings
   notification: {
+    webhook: {
+      url: 'SUA_URL_DO_WEBHOOK_DO_TEAMS_AQUI',
+      method: 'POST',
+      payloadType: 'json',
+      payload: {
+        text: 'Aviso de Status: $MSG',
+      },
+      timeout: 10000,
+    },
     timeZone: 'America/Sao_Paulo',
     gracePeriod: 5,
   },
 }
 
-// Manutenções comentadas
 const maintenances: MaintenanceConfig[] = []
 
-// Don't edit this line
 export { maintenances, pageConfig, workerConfig }
